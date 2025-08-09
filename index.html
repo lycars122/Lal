@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LY Cars</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; }
+        header { background: #111; color: #fff; padding: 15px; text-align: center; position: relative; }
+        nav { position: absolute; top: 15px; left: 15px; font-size: 24px; cursor: pointer; }
+        .menu { display: none; background: #222; padding: 10px; position: absolute; top: 50px; left: 0; width: 100%; }
+        .menu a { color: #fff; display: block; padding: 10px; text-decoration: none; }
+        .menu a:hover { background: #333; }
+        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 40px; }
+        .hero img { max-width: 200px; height: auto; }
+        .hero h1 { margin: 15px 0 5px; font-size: 28px; }
+        .hero p { max-width: 600px; text-align: center; font-size: 18px; color: #555; }
+        section { padding: 40px 20px; text-align: center; }
+        .car-list { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .car { border: 1px solid #ddd; padding: 10px; width: 250px; border-radius: 5px; background: #fafafa; }
+        .car img { max-width: 100%; border-radius: 5px; }
+        button { padding: 10px 20px; background: #111; color: #fff; border: none; cursor: pointer; }
+        button:hover { background: #333; }
+    </style>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav onclick="toggleMenu()">&#9776;</nav>
+        LY Cars
+        <div class="menu" id="menu">
+            <a href="#cars">السيارات المعروضة</a>
+            <a href="#buy">اطلب سيارة</a>
+            <a href="#sell">بيع سيارتك</a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <img src="logo.png" alt="LY Cars Logo">
+        <h1>LY Cars</h1>
+        <p>معنا فيك تبيع، تبدل، أو تلاقي سيارة أحلامك. إذا ما كانت عنا، مندوّر لك عليها وبأفضل سعر مع كفالة.</p>
+    </div>
+
+    <section id="cars">
+        <h2>السيارات المعروضة</h2>
+        <div class="car-list">
+            <div class="car">
+                <img src="https://via.placeholder.com/250x150" alt="Car 1">
+                <h3>BMW M4 2022</h3>
+                <p>$75,000</p>
+            </div>
+            <div class="car">
+                <img src="https://via.placeholder.com/250x150" alt="Car 2">
+                <h3>Mercedes CLS 500</h3>
+                <p>$35,000</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="buy">
+        <h2>اطلب سيارة</h2>
+        <p>راسلنا على واتساب لتطلب السيارة اللي بدك إياها.</p>
+        <a href="https://wa.me/4917664323579" target="_blank">
+            <button>تواصل واتساب</button>
+        </a>
+    </section>
+
+    <section id="sell">
+        <h2>بيع سيارتك</h2>
+        <p>ابعث لنا تفاصيل سيارتك على واتساب أو إيميل.</p>
+        <a href="mailto:Ly.cars@gmx.de" target="_blank">
+            <button>إرسال عبر الإيميل</button>
+        </a>
+    </section>
+</body>
+</html>
