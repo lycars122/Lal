@@ -1,81 +1,82 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LY Cars</title>
-    <style>
-        body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; }
-        header { background: #111; color: #fff; padding: 15px; text-align: center; position: relative; }
-        nav { position: absolute; top: 15px; left: 15px; font-size: 24px; cursor: pointer; }
-        .menu { display: none; background: #222; padding: 10px; position: absolute; top: 50px; left: 0; width: 100%; }
-        .menu a { color: #fff; display: block; padding: 10px; text-decoration: none; }
-        .menu a:hover { background: #333; }
-        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 40px; }
-        .hero img { max-width: 200px; height: auto; }
-        .hero h1 { margin: 15px 0 5px; font-size: 28px; }
-        .hero p { max-width: 600px; text-align: center; font-size: 18px; color: #555; }
-        section { padding: 40px 20px; text-align: center; }
-        .car-list { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
-        .car { border: 1px solid #ddd; padding: 10px; width: 250px; border-radius: 5px; background: #fafafa; }
-        .car img { max-width: 100%; border-radius: 5px; }
-        button { padding: 10px 20px; background: #111; color: #fff; border: none; cursor: pointer; }
-        button:hover { background: #333; }
-    </style>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- الهيدر والقائمة -->
     <header>
-        <nav onclick="toggleMenu()">&#9776;</nav>
-        LY Cars
-        <div class="menu" id="menu">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <nav id="menu">
             <a href="#cars">السيارات المعروضة</a>
             <a href="#buy">اطلب سيارة</a>
             <a href="#sell">بيع سيارتك</a>
-        </div>
+        </nav>
     </header>
 
-    <div class="hero">
-        <img src="logo.png" alt="LY Cars Logo">
+    <!-- القسم الرئيسي مع اللوجو -->
+    <section class="hero">
+        <img src="logo.png" alt="LY Cars Logo" class="logo">
         <h1>LY Cars</h1>
         <p>معنا فيك تبيع، تبدل، أو تلاقي سيارة أحلامك. إذا ما كانت عنا، مندوّر لك عليها وبأفضل سعر مع كفالة.</p>
-    </div>
+    </section>
 
+    <!-- قسم الخدمات -->
+    <section class="services">
+        <h2>خدماتنا</h2>
+        <div class="service-list">
+            <div class="service">بيع وشراء السيارات</div>
+            <div class="service">تبديل السيارات</div>
+            <div class="service">البحث عن سيارات خاصة</div>
+            <div class="service">تقييم السيارات</div>
+        </div>
+    </section>
+
+    <!-- السيارات المعروضة -->
     <section id="cars">
         <h2>السيارات المعروضة</h2>
         <div class="car-list">
             <div class="car">
-                <img src="https://via.placeholder.com/250x150" alt="Car 1">
+                <img src="https://cdn.motor1.com/images/mgl/6x6oO/s3/2022-bmw-m4-csl.jpg" alt="BMW M4">
                 <h3>BMW M4 2022</h3>
-                <p>$75,000</p>
+                <p>75,000 €</p>
             </div>
             <div class="car">
-                <img src="https://via.placeholder.com/250x150" alt="Car 2">
+                <img src="https://cdn.motor1.com/images/mgl/0ANx0/s3/2021-mercedes-benz-cls-facelift.jpg" alt="Mercedes CLS 500">
                 <h3>Mercedes CLS 500</h3>
-                <p>$35,000</p>
+                <p>35,000 €</p>
+            </div>
+            <div class="car">
+                <img src="https://cdn.motor1.com/images/mgl/BE66q/s3/2023-audi-rs7-performance.jpg" alt="Audi RS7">
+                <h3>Audi RS7 2023</h3>
+                <p>110,000 €</p>
             </div>
         </div>
     </section>
 
+    <!-- طلب سيارة -->
     <section id="buy">
         <h2>اطلب سيارة</h2>
-        <p>راسلنا على واتساب لتطلب السيارة اللي بدك إياها.</p>
-        <a href="https://wa.me/4917664323579" target="_blank">
-            <button>تواصل واتساب</button>
-        </a>
+        <p>راسلنا على واتساب لطلب السيارة التي ترغب بها.</p>
+        <a class="btn" href="https://wa.me/4917664323579" target="_blank">تواصل واتساب</a>
     </section>
 
+    <!-- بيع سيارة -->
     <section id="sell">
         <h2>بيع سيارتك</h2>
         <p>ابعث لنا تفاصيل سيارتك على واتساب أو إيميل.</p>
-        <a href="mailto:Ly.cars@gmx.de" target="_blank">
-            <button>إرسال عبر الإيميل</button>
-        </a>
+        <a class="btn" href="mailto:Ly.cars@gmx.de" target="_blank">إرسال عبر الإيميل</a>
     </section>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
