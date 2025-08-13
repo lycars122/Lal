@@ -169,3 +169,50 @@ label{ display:grid; gap:6px; }
 input, textarea{
   width: 100%;
   background: #0f0f0f;
+/* ==== FIX 1: امنع التمدد برا الشاشة ==== */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* ==== FIX 2: حط كل الأقسام بكونتينر بعرض مريح وبالنص ==== */
+.section, .hero-inner, .form-card, #inventory, #find, #sell {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;         /* بالنص */
+  padding-inline: 16px;        /* مسافة من الطرفين */
+}
+
+/* ==== FIX 3: الكرت الحاوي للفورم ==== */
+.form-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  overflow: hidden;            /* ما يطلع شي برا الحواف */
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+
+/* ==== FIX 4: شبكة الحقول ==== */
+.form-grid{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+.form-grid .row2{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.form-grid .row2 > *{ min-width: 0; }   /* يمنع التمدد */
+
+/* على الموبايل الصغير خليهم عمود واحد */
+@media (max-width: 560px){
+  .form-grid .row2{ grid-template-columns: 1fr; }
+}
+
+/* ==== FIX 5: الحقول نفسها ==== */
+label{ display:grid; gap:6px; }
+input, textarea{
+  width: 100%;
+  box-sizing: border-box;
+  background: #0f0f0f;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  padding: 12px;
+  color: #fff;
+}
+
+/* ==== FIX 6: الصور داخل البطاقات ما تتجاوز العرض ==== */
+img{ max-width:100%; height:auto; display:block; border-radius:12px; }
