@@ -299,3 +299,9 @@ img.hero-logo,
   padding: 20px;
   box-sizing: border-box;
 }
+/* مسافة بين اللوجو وباقي العناصر */
+.hero-title,
+.hero-desc,
+.hero .btn {
+  margin-top: 20px; /* فراغ 20 بكسل */
+}
