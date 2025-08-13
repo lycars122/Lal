@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LY Cars – تفاصيل سيارة</title>
+  <meta name="description" content="تفاصيل السيارة المختارة من LY Cars.">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <style>
+    :root{--bg:#0a0a0a;--fg:#fff;--muted:#c9c9c9;--brand:#ff4141;--card:#141414;--border:#262626}
+    *{box-sizing:border-box} html,body{margin:0;max-width:100%;overflow-x:hidden}
+    body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 20px;background:#111;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+    .brand{font-weight:900}
+    .lang{background:#222;color:#fff;border:1px solid var(--border);border-radius:8px;padding:6px 10px}
+    main{padding:20px;max-width:1100px;margin:auto}
+    .heroImg{width:100%;border-radius:14px;box-shadow:0 15px 40px rgba(0,0,0,.35)}
+    .gallery{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .gallery img{width:160px;height:100px;object-fit:cover;border-radius:10px;border:1px solid var(--border);cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+    .btn{background:var(--brand);color:#000;border:none;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    a.btn{display:inline-block;text-decoration:none}
+    footer{padding:16px;text-align:center;color:#bdbdbd;border-top:1px solid var(--border);margin-top:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html#inventory" style="color:#fff;text-decoration:none">← <span data-i18n="back">رجوع</span></a>
+    <div class="brand">LY Cars</div>
+    <select id="langSel" class="lang">
+      <option value="ar" selected>AR</option>
+      <option value="en">EN</option>
+      <option value="de">DE</option>
+    </select>
+  </header>
+
+  <main>
+    <h1 id="title">سيارة</h1>
+    <img id="hero" class="heroImg" src="" alt="">
+    <div class="gallery" id="gallery"></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3 data-i18n="details">التفاصيل</h3>
+        <div class="specs" id="specs"></div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="contact">تواصل</h3>
+        <div class="row">
+          <a id="waBtn" class="btn" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a id="mailBtn" class="btn" href="#">Email</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="about">عن LY Cars</h3>
+        <p data-i18n="aboutText">
+          نحن نوفّر لك خيار البيع، الشراء، أو توفير سيارة أحلامك من ألمانيا والاتحاد الأوروبي، بأفضل الأسعار ومع كفالة وراحة بال.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="year"></span> LY Cars • WhatsApp +49 176 64323579 • Email Ly.cars@gmx.de</footer>
+
+  <script>
+    const WA='4917664323579', EMAIL='Ly.cars@gmx.de';
+
+    // لغات
+    const dict={ar:{back:'رجوع',details:'التفاصيل',contact:'تواصل',about:'عن LY Cars',aboutText:'نحن نوفّر لك خيار البيع، الشراء، أو توفير سيارة أحلامك من ألمانيا والاتحاد الأوروبي، بأفضل الأسعار ومع كفالة وراحة بال.'},
+                en:{back:'Back',details:'Details',contact:'Contact',about:'About LY Cars',aboutText:'We help you sell, buy, or source your dream car from DE/EU with the best price, warranty and peace of mind.'},
+                de:{back:'Zurück',details:'Details',contact:'Kontakt',about:'Über LY Cars',aboutText:'Wir unterstützen Sie beim Verkauf, Kauf oder bei der Beschaffung Ihres Traumwagens aus DE/EU – zum besten Preis, mit Garantie und sorgenfreier Abwicklung.'}};
+    const sel=document.getElementById('langSel');
+    function applyLang(l){document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(dict[l][k])el.textContent=dict[l][k];});}
+    (function(){const s=localStorage.getItem('lang');if(s)sel.value=s;applyLang(sel.value);sel.addEventListener('change',()=>{applyLang(sel.value);localStorage.setItem('lang',sel.value);});})();
+
+    // بيانات السيارات (لازم تطابق الـ index.html)
+    const cars={
+      m4:{
+        id:'m4',
+        title:'BMW M4 Competition',
+        price:63500,
+        spec:'2019 • 41,000 km • DCT • Petrol • 510 hp',
+        hero:'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1600&q=70',
+        images:[
+          'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=60',
+          'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=1200&q=60'
+        ],
+        specs:{
+          Make:'BMW', Model:'M4 Competition', Year:'2019', Mileage:'41,000 km',
+          Gearbox:'DCT', Fuel:'Petrol', Power:'510 hp', Color:'Black'
+        }
+      },
+      cls:{
+        id:'cls',
+        title:'Mercedes-Benz CLS 500',
+        price:18900,
+        spec:'2011 • 145,000 km • Automatic • Petrol • 388 hp',
+        hero:'https://images.unsplash.com/photo-1542282811-943ef1a977c2?auto=format&fit=crop&w=1600&q=70',
+        images:[
+          'https://images.unsplash.com/photo-1542282811-943ef1a977c2?auto=format&fit=crop&w=1200&q=60',
+          'https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=1200&q=60'
+        ],
+        specs:{
+          Make:'Mercedes-Benz', Model:'CLS 500', Year:'2011', Mileage:'145,000 km',
+          Gearbox:'Automatic', Fuel:'Petrol', Power:'388 hp', Color:'Gray'
+        }
+      },
+      rs7:{
+        id:'rs7',
+        title:'Audi RS7 Performance',
+        price:99900,
+        spec:'2023 • 12,000 km • Automatic • Petrol • 630 hp',
+        hero:'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1600&q=70',
+        images:[
+          'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=60',
+          'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=60'
+        ],
+        specs:{
+          Make:'Audi', Model:'RS7 Performance', Year:'2023', Mileage:'12,000 km',
+          Gearbox:'Automatic', Fuel:'Petrol', Power:'630 hp', Color:'Red'
+        }
+      }
+    };
+
+    // التحديد من الكويري
+    function q(name){return new URLSearchParams(location.search).get(name);}
+    const id=q('id')||'cls';
+    const car=cars[id]||cars.cls;
+
+    // تعبئة الصفحة
+    document.getElementById('title').textContent = `${car.title} — €${car.price.toLocaleString()}`;
+    const hero=document.getElementById('hero');
+    hero.src=car.hero; hero.alt=car.title;
+    const gal=document.getElementById('gallery');
+    gal.innerHTML = car.images.map(src=>`<img src="${src}" alt="${car.title}" loading="lazy">`).join('');
+    gal.addEventListener('click',e=>{ if(e.target.tagName==='IMG'){ hero.src=e.target.src; } });
+
+    // المواصفات
+    const specs=document.getElementById('specs');
+    specs.innerHTML = Object.entries(car.specs).map(([k,v])=>`<div><strong>${k}:</strong> ${v}</div>`).join('');
+
+    // تواصل
+    function waLink(text){return `https://wa.me/${WA}?text=${encodeURIComponent(text)}`}
+    function mailtoLink(subject,body){return `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
+    const msg=`Interested in ${car.title} (€${car.price.toLocaleString()})`;
+    document.getElementById('waBtn').href = waLink(msg);
+    document.getElementById('mailBtn').href = mailtoLink(`Interest: ${car.title}`, msg);
+
+    // سنة
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // JSON-LD للـ SEO
+    const jsonLd = {
+      "@context":"https://schema.org",
+      "@type":"Vehicle",
+      "name": car.title,
+      "mileageFromOdometer":{"@type":"QuantitativeValue","value":car.specs.Mileage.replace(/[^0-9]/g,''),"unitCode":"KMT"},
+      "fuelType": car.specs.Fuel,
+      "bodyType": "Coupe",
+      "brand":{"@type":"Brand","name": car.specs.Make},
+      "model": car.specs.Model,
+      "vehicleModelDate": car.specs.Year,
+      "offers":{"@type":"Offer","priceCurrency":"EUR","price": String(car.price),"availability":"https://schema.org/InStock"},
+      "seller":{"@type":"AutoDealer","name":"LY Cars","telephone":"+49 176 64323579","email":"Ly.cars@gmx.de","url":"https://lycars.com"}
+    };
+    const s=document.createElement('script'); s.type='application/ld+json'; s.textContent=JSON.stringify(jsonLd); document.head.appendChild(s);
+  </script>
+</body>
+</html>
