@@ -238,3 +238,12 @@ img{ max-width:100%; height:auto; display:block; border-radius:12px; }
   display: block;
   margin: 0 auto 16px auto; /* بالنص وفي مسافة تحت */
 }
+/* كبّر اللوغو ليملأ العرض مع فراغ 20px من كل جهة */
+.hero-logo{
+  width: calc(100% - 40px) !important;
+  max-width: 900px !important;   /* حد أقصى على الشاشات الكبيرة */
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto 16px !important; /* بالنص + مسافة تحت */
+  object-fit: contain !important;
+}
