@@ -133,3 +133,39 @@ textarea{min-height:110px}
   .form-grid{grid-template-columns:1fr 1fr}
   .form-grid .full{grid-column:1/-1}
 }
+/*===== منع التمدد برا الشاشة =====*/
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* حصر المحتوى وعمل هوامش من الطرفين */
+.section,
+.hero-inner,
+.form-card {
+  width: 100%;
+  max-width: 680px;          /* عرض مريح للموبايل */
+  margin-inline: auto;       /* بالنص */
+  padding-inline: 16px;      /* مسافة من الأطراف */
+}
+
+/* صندوق الفورم نفسه */
+.form-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  overflow: hidden;          /* ما يطلع شي خارج الحواف */
+}
+
+/* شبكة الحقول */
+.form-grid{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+.form-grid .row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* على الشاشات الصغيرة جدًا خليه عمود واحد */
+@media (max-width: 600px){
+  .form-grid .row2{ grid-template-columns: 1fr; }
+}
+
+/* الحقول نفسها */
+label{ display:grid; gap:6px; }
+input, textarea{
+  width: 100%;
+  background: #0f0f0f;
