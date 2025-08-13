@@ -4,178 +4,305 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LY Cars</title>
-  <<link rel="stylesheet" href="style.css?v=4">
-    <style>
-  /* === HOTFIX: نطبق فورًا بدون ما نعتمد على style.css === */
-  body{background:#0a0a0a !important; color:#fff !important;}
-  .hero{
-    min-height:100vh !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    text-align:center !important;
-    padding:20px !important;
-    background:linear-gradient(180deg,#0a0a0a,#0a0a0a 55%,#111) !important;
-  }
-  .hero-inner{max-width:none !important; width:100% !important; padding-inline:0 !important;}
-  .hero-logo{
-    width:calc(100% - 40px) !important;   /* فراغ 20px من كل جهة */
-    max-width:1200px !important;          /* حد أقصى على الكبير */
-    height:auto !important;
-    display:block !important;
-    margin:0 auto 16px !important;
-    object-fit:contain !important;
-    filter: drop-shadow(0 0 8px rgba(255,65,65,.6)) !important;
-  }
-  .hero-title,.hero-desc,.hero .btn{margin-top:20px !important;}
-    </style>
+
+  <!-- SEO & Sharing -->
+  <meta name="description" content="بيع، شراء، وتوفير سيارات أحلامك بأفضل سعر وكفالة.">
+  <meta property="og:title" content="LY Cars – سيارات مميزة للبيع">
+  <meta property="og:description" content="بيع، شراء، وتوفير سيارات أحلامك بأفضل سعر وكفالة.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1600&q=60">
+  <meta property="og:url" content="https://lycars.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+
+  <!-- كل التنسيقات + الأنيميشن + إصلاحات الموبايل inline لضمان التطبيق -->
+  <style>
+    :root{
+      --bg:#0a0a0a; --fg:#fff; --muted:#c9c9c9; --brand:#ff4141;
+      --card:#141414; --border:#262626;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;max-width:100%;overflow-x:hidden}
+    body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6}
+
+    /* Header */
+    header.header{
+      position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:12px;
+      padding:10px 20px;background:#111;border-bottom:1px solid var(--border)
+    }
+    .brand{font-size:1.25rem;font-weight:900}
+    .lang{
+      margin-inline-start:auto;background:#222;color:#fff;border:1px solid var(--border);
+      border-radius:8px;padding:6px 10px
+    }
+
+    /* HERO: لوغو كبير يغطي الشاشة مع فراغ من الأطراف */
+    .hero{
+      min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:20px;background:linear-gradient(180deg,#0a0a0a,#0a0a0a 55%,#111);
+      will-change:background-position;
+      background-size:cover;background-position:center;
+    }
+    .hero-inner{width:100%}
+    .hero-logo{
+      width:calc(100% - 40px);max-width:1200px;height:auto;display:block;margin:0 auto 16px;
+      object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,65,65,.6));
+      animation:logoFadeIn 1.2s ease-out forwards;
+    }
+    .hero-title,.hero-desc,.hero .btn{margin-top:20px}
+    .hero-desc{max-width:780px;margin-inline:auto;color:var(--muted)}
+
+    .btn{
+      background:var(--brand);border:none;color:#000;padding:12px 18px;border-radius:10px;
+      cursor:pointer;font-weight:800;transition:.3s
+    }
+    .btn:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(255,65,65,.6)}
+
+    /* أقسام */
+    .section{padding:36px 20px;max-width:1200px;margin:auto}
+    .section-title{text-align:center;margin:0 0 22px 0;font-weight:900}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .card img{width:100%;border-radius:12px;display:block}
+
+    /* فلاتر بسيطة فوق السيارات */
+    .filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+    .filters select,.filters input{
+      background:#111;color:#fff;border:1px solid #333;border-radius:10px;padding:8px 10px
+    }
+
+    /* Reveal on scroll */
+    .reveal{opacity:0;transform:translateY(18px);transition:.6s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    /* Animations */
+    @keyframes logoFadeIn{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+    .card a{color:#fff;text-decoration:none}
+
+    /* CTA ثابتة + رجوع للأعلى */
+    .float-wa{
+      position:fixed; right:14px; bottom:14px; z-index:9999;
+      background:#25D366; color:#000; font-weight:800;
+      padding:12px 16px; border-radius:999px; text-decoration:none;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+    #toTop{position:fixed; right:14px; bottom:74px; z-index:9998; display:none;
+      background:#222; color:#fff; border:1px solid #333; border-radius:10px; padding:10px 12px}
+
+    /* صور */
+    img{max-width:100%;height:auto;display:block}
+  </style>
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
     <div class="brand">LY Cars</div>
-    <div class="actions">
-      <select id="langSel" class="lang">
-        <option value="ar" selected>AR</option>
-        <option value="en">EN</option>
-        <option value="de">DE</option>
-      </select>
-      <button class="hamburger" id="menuBtn" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <select id="langSel" class="lang" aria-label="Language">
+      <option value="ar" selected>AR</option>
+      <option value="en">EN</option>
+      <option value="de">DE</option>
+    </select>
   </header>
 
-  <!-- Drawer -->
-  <aside class="drawer" id="drawer">
-    <div class="drawer-panel">
-      <button class="close" id="closeDrawer">✕</button>
-      <nav class="drawer-nav">
-        <a href="#inventory" data-i18n="menu_inventory">السيارات المعروضة</a>
-        <a href="#find" data-i18n="menu_find">اطلب سيارة</a>
-        <a href="#sell" data-i18n="menu_sell">بيع سيارتك</a>
-      </nav>
-    </div>
-    <div class="backdrop" id="drawerBackdrop"></div>
-  </aside>
-
-  <!-- HERO full-screen -->
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-inner">
       <img class="hero-logo" src="logo.png" alt="LY Cars Logo" onerror="this.src='placeholder-logo.svg'">
-      <h1 class="hero-title">LY Cars</h1>
-      <p class="hero-desc" id="heroDesc" data-i18n="hero">
+      <h1 class="hero-title" data-i18n="title">LY Cars</h1>
+      <p class="hero-desc" data-i18n="hero">
         معنا بتقدر تبيع، تبدّل، أو تلاقي سيارة أحلامك. وإذا مو موجودة، مندوّر لك عليها وبنضمن أفضل عرض بالسوق مع كفالة وراحة بال.
       </p>
-      <button class="btn primary" id="exploreBtn" data-i18n="explore">استكشف الخدمات</button>
+      <button class="btn" data-i18n="explore" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        استكشف الخدمات
+      </button>
     </div>
   </section>
 
   <!-- Services -->
-  <section class="section" id="services">
+  <section class="section reveal" id="services">
     <h2 class="section-title" data-i18n="services">الخدمات</h2>
-    <div class="services-grid">
-      <div class="card service">
+    <div class="grid">
+      <div class="card">
         <h3 data-i18n="svcBuyT">شراء — السيارات المتوفّرة</h3>
         <p data-i18n="svcBuyD">تصفّح السيارات الجاهزة الآن مع المواصفات والصور وتواصل واتساب فورًا.</p>
-        <a class="btn ghost" href="#inventory" data-i18n="viewCars">شاهد السيارات</a>
       </div>
-      <div class="card service">
+      <div class="card">
         <h3 data-i18n="svcFindT">توفير — اطلب سيارتك</h3>
         <p data-i18n="svcFindD">احكيلنا الميزانية والسنة والمواصفات. منبحث بألمانيا والاتحاد الأوروبي ومنجيب لك الأفضل.</p>
-        <a class="btn ghost" href="#find" data-i18n="request">اطلب سيارتك</a>
       </div>
-      <div class="card service">
+      <div class="card">
         <h3 data-i18n="svcSellT">بيع — سيارتك</h3>
         <p data-i18n="svcSellD">عرض سريع. ارفع الصور والتفاصيل ومنرجع لك على واتساب/إيميل.</p>
-        <a class="btn ghost" href="#sell" data-i18n="sellNow">بيع الآن</a>
       </div>
     </div>
   </section>
 
   <!-- Inventory -->
-  <section class="section" id="inventory">
+  <section class="section reveal" id="inventory">
     <h2 class="section-title" data-i18n="inv">سيارات مميزة</h2>
-    <div class="cards" id="inventoryGrid">
-      <!-- filled by JS -->
+
+    <div class="filters">
+      <select id="fMake">
+        <option value="">كل الماركات</option>
+        <option>BMW</option><option>Mercedes</option><option>Audi</option>
+      </select>
+      <input id="fYear" type="number" placeholder="سنة من">
+      <input id="fPrice" type="number" placeholder="سعر أقصى (€)">
+      <button class="btn" onclick="applyFilters()">فلترة</button>
     </div>
+
+    <div class="grid" id="carsGrid"></div>
   </section>
 
-  <!-- Find form -->
-  <section class="section" id="find">
-    <div class="card form-card">
-      <h3 data-i18n="findTitle">اطلب سيارتك</h3>
-      <form id="findForm" class="form-grid">
-        <label><span data-i18n="name">اسمك</span><input name="name"></label>
-        <label><span data-i18n="phone">هاتف</span><input name="phone"></label>
-        <label><span data-i18n="emailAddr">إيميل</span><input name="email"></label>
-        <label><span data-i18n="city">المدينة</span><input name="city"></label>
-        <label><span data-i18n="make">الماركة</span><input name="make"></label>
-        <label><span data-i18n="model">الموديل</span><input name="model"></label>
-        <div class="row2">
-          <label><span data-i18n="yearFrom">سنة من</span><input name="yearFrom"></label>
-          <label><span data-i18n="yearTo">سنة إلى</span><input name="yearTo"></label>
-        </div>
-        <div class="row2">
-          <label><span data-i18n="budgetMin">أقل ميزانية (€)</span><input name="budgetMin"></label>
-          <label><span data-i18n="budgetMax">أعلى ميزانية (€)</span><input name="budgetMax"></label>
-        </div>
-        <label><span data-i18n="mileageMax">أقصى كيلومترات (كم)</span><input name="mileageMax"></label>
-        <label><span data-i18n="color">اللون</span><input name="color"></label>
-        <label><span data-i18n="body">الهيكل</span><input name="body"></label>
-        <label class="full"><span data-i18n="features">مواصفات مهمة (بانوراما، ACC…)</span><textarea name="features"></textarea></label>
-        <label class="full"><span data-i18n="window">المدة المتوقعة للشراء</span><input name="window"></label>
-        <label class="full"><span data-i18n="notes">ملاحظات</span><textarea name="notes"></textarea></label>
-        <button type="button" class="btn primary" id="findSend" data-i18n="submit">إرسال</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Sell form -->
-  <section class="section" id="sell">
-    <div class="card form-card">
-      <h3 data-i18n="sellTitle">بيع سيارتك</h3>
-      <form id="sellForm" class="form-grid">
-        <label><span data-i18n="name">اسمك</span><input name="name"></label>
-        <label><span data-i18n="phone">هاتف</span><input name="phone"></label>
-        <label><span data-i18n="emailAddr">إيميل</span><input name="email"></label>
-        <label><span data-i18n="city">المدينة</span><input name="city"></label>
-        <label><span data-i18n="sell_make">الماركة</span><input name="sell_make"></label>
-        <label><span data-i18n="sell_model">الموديل</span><input name="sell_model"></label>
-        <label><span data-i18n="sell_year">السنة</span><input name="sell_year"></label>
-        <label><span data-i18n="mileage">الكيلومترات (كم)</span><input name="mileage"></label>
-        <label><span data-i18n="vin">VIN (اختياري)</span><input name="vin"></label>
-        <label><span data-i18n="condition">الحالة</span><input name="condition"></label>
-        <label class="full"><span data-i18n="accidents">تاريخ الحوادث</span><textarea name="accidents"></textarea></label>
-        <label class="full"><span data-i18n="service">تاريخ الصيانة</span><textarea name="service"></textarea></label>
-        <label><span data-i18n="priceFld">السعر المطلوب (€)</span><input name="price"></label>
-        <label class="full"><span data-i18n="photos">صور (حتى 10)</span><input type="file" id="photos" accept="image/*" multiple></label>
-        <div class="preview" id="preview"></div>
-        <label class="full"><span data-i18n="notes">ملاحظات</span><textarea name="notes"></textarea></label>
-        <button type="button" class="btn primary" id="sellSend" data-i18n="submit">إرسال</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Modal -->
-  <div class="modal" id="carModal">
-    <div class="dialog">
-      <img id="modalImg" alt="">
-      <h3 id="modalTitle"></h3>
-      <p id="modalSpec" class="muted"></p>
-      <div class="modal-actions">
-        <a id="modalWa" class="btn primary" target="_blank" rel="noreferrer">WhatsApp</a>
-        <a id="modalMail" class="btn ghost">Email</a>
-        <button class="btn ghost" id="closeModal">Close</button>
-      </div>
-    </div>
-    <div class="backdrop" id="modalBackdrop"></div>
-  </div>
-
-  <footer class="footer">
+  <footer class="section" style="text-align:center;border-top:1px solid var(--border);color:#bdbdbd">
     © <span id="year"></span> LY Cars • WhatsApp +49 176 64323579 • Email Ly.cars@gmx.de
   </footer>
 
-  <script src="script.js"></script>
+  <!-- CTA ثابت + رجوع للأعلى -->
+  <a href="https://wa.me/4917664323579" class="float-wa" aria-label="WhatsApp">WhatsApp</a>
+  <button id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- i18n + reveal + بيانات السيارات + منطق الفلاتر -->
+  <script>
+    // لغات
+    const dict = {
+      ar:{
+        title:'LY Cars',
+        hero:'معنا بتقدر تبيع، تبدّل، أو تلاقي سيارة أحلامك. وإذا مو موجودة، مندوّر لك عليها وبنضمن أفضل عرض بالسوق مع كفالة وراحة بال.',
+        explore:'استكشف الخدمات', services:'الخدمات',
+        svcBuyT:'شراء — السيارات المتوفّرة',
+        svcBuyD:'تصفّح السيارات الجاهزة الآن مع المواصفات والصور وتواصل واتساب فورًا.',
+        svcFindT:'توفير — اطلب سيارتك',
+        svcFindD:'احكيلنا الميزانية والسنة والمواصفات. منبحث بألمانيا والاتحاد الأوروبي ومنجيب لك الأفضل.',
+        svcSellT:'بيع — سيارتك',
+        svcSellD:'عرض سريع. ارفع الصور والتفاصيل ومنرجع لك على واتساب/إيميل.',
+        inv:'سيارات مميزة'
+      },
+      en:{
+        title:'LY Cars',
+        hero:"With us, you can sell, trade, or find your dream car. If it’s not in stock, we’ll source it — best deal, with warranty and peace of mind.",
+        explore:'Explore Services', services:'Services',
+        svcBuyT:'Buy — Inventory',
+        svcBuyD:'Browse available cars now with specs, photos, and instant WhatsApp contact.',
+        svcFindT:'Source — Find a Car',
+        svcFindD:'Tell us your budget, year, and features. We search DE/EU and bring the best match.',
+        svcSellT:'Sell — Your Car',
+        svcSellD:'Get a fast offer. Upload photos & details; we reply via WhatsApp/Email.',
+        inv:'Featured Cars'
+      },
+      de:{
+        title:'LY Cars',
+        hero:'Bei uns können Sie Ihr Auto verkaufen, tauschen oder Ihr Traumauto finden. Falls es nicht verfügbar ist, beschaffen wir es – zum besten Preis, mit Garantie und sorgenfreier Abwicklung.',
+        explore:'Leistungen ansehen', services:'Leistungen',
+        svcBuyT:'Kaufen — Fahrzeuge',
+        svcBuyD:'Verfügbare Fahrzeuge jetzt ansehen. Daten, Fotos und WhatsApp-Kontakt.',
+        svcFindT:'Beschaffung — Auto finden',
+        svcFindD:'Budget, Baujahr und Extras angeben. Wir suchen in DE/EU die beste Option.',
+        svcSellT:'Verkaufen — Ihr Auto',
+        svcSellD:'Schnelles Angebot. Fotos & Details; Rückmeldung per WhatsApp/E-Mail.',
+        inv:'Top Fahrzeuge'
+      }
+    };
+    const sel = document.getElementById('langSel');
+    function applyLang(lang){
+      document.documentElement.lang = lang;
+      document.documentElement.dir  = (lang==='ar' ? 'rtl' : 'ltr');
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if (dict[lang][key]) el.textContent = dict[lang][key];
+      });
+    }
+    // حفظ اختيار اللغة + كشف لغة المتصفح
+    (function(){
+      const saved=localStorage.getItem('lang');
+      if(saved){ sel.value=saved; }
+      else{
+        const b=(navigator.language||'ar').slice(0,2);
+        if(['ar','en','de'].includes(b)) sel.value=b;
+      }
+      applyLang(sel.value);
+      sel.addEventListener('change',()=>{ applyLang(sel.value); localStorage.setItem('lang', sel.value); });
+    })();
+
+    // سنة الفوتر
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Parallax خفيف للهيرو
+    addEventListener('scroll', ()=>{
+      const y = Math.min(60, scrollY/20);
+      document.querySelector('.hero').style.backgroundPosition = `center ${y}px`;
+    }, {passive:true});
+
+    // بيانات السيارات (صور حقيقية من Unsplash)
+    const cars = [
+      {
+        id:'m4',
+        make:'BMW',
+        year:2019,
+        price:63500,
+        title:'BMW M4 Competition',
+        sub:'2019 • 41,000 km',
+        img:'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1400&q=60'
+      },
+      {
+        id:'cls',
+        make:'Mercedes',
+        year:2011,
+        price:18900,
+        title:'Mercedes-Benz CLS 500',
+        sub:'2011 • 145,000 km',
+        img:'https://images.unsplash.com/photo-1542282811-943ef1a977c2?auto=format&fit=crop&w=1400&q=60'
+      },
+      {
+        id:'rs7',
+        make:'Audi',
+        year:2023,
+        price:99900,
+        title:'Audi RS7 Performance',
+        sub:'2023 • 12,000 km',
+        img:'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1400&q=60'
+      }
+    ];
+
+    function carCard(c){
+      return `
+        <a class="card" href="car.html?id=${encodeURIComponent(c.id)}">
+          <img src="${c.img}" alt="${c.title}" loading="lazy">
+          <h3>${c.title}</h3>
+          <p>€${c.price.toLocaleString()} — ${c.sub}</p>
+        </a>`;
+    }
+    function renderCars(list){
+      document.getElementById('carsGrid').innerHTML = list.map(carCard).join('');
+    }
+    function applyFilters(){
+      const make = document.getElementById('fMake').value;
+      const yMin = parseInt(document.getElementById('fYear').value||'0',10);
+      const pMax = parseInt(document.getElementById('fPrice').value||'0',10);
+      const out = cars.filter(c=>{
+        if(make && c.make!==make) return false;
+        if(yMin && c.year<yMin) return false;
+        if(pMax && c.price>pMax) return false;
+        return true;
+      });
+      renderCars(out);
+    }
+    renderCars(cars);
+
+    // زر للأعلى
+    const t=document.getElementById('toTop');
+    addEventListener('scroll',()=>{ t.style.display = (scrollY>400)?'block':'none';},{passive:true});
+    t.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+  </script>
+
 </body>
 </html>
