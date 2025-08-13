@@ -268,3 +268,23 @@ img.hero-logo,
   margin: 0 auto 16px !important;      /* بالنص + مسافة تحت */
   object-fit: contain !important;
 }
+/* ===== تكبير اللوجو على عرض الشاشة ===== */
+.hero-inner{
+  max-width: none !important;   /* إلغاء الحصر القديم */
+  width: 100% !important;
+  padding-inline: 0 !important;
+}
+
+.hero-logo{
+  display: block !important;
+  width: calc(100% - 40px) !important;  /* 20px فراغ يمين ويسار */
+  max-width: 1200px !important;         /* حد أقصى على الشاشات الكبيرة */
+  height: auto !important;
+  margin: 0 auto 16px !important;       /* بالنص + مسافة تحت */
+  object-fit: contain !important;
+}
+
+/* اختياري: يخلي اللوجو يغطي طول الشاشة */
+.hero{ 
+  min-height: calc(100svh - 64px);
+}
