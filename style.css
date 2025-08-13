@@ -216,3 +216,18 @@ input, textarea{
 
 /* ==== FIX 6: الصور داخل البطاقات ما تتجاوز العرض ==== */
 img{ max-width:100%; height:auto; display:block; border-radius:12px; }
+/* وسّع حاوية الهيرو عشان ما تحدّ العرض */
+.hero-inner{
+  max-width: none !important;
+  width: 100%;
+  padding-inline: 20px; /* فراغ من الجانبين */
+}
+
+/* خلّي اللوغو ياخذ العرض مع هامش 20px من كل طرف */
+.hero-logo{
+  width: 100% !important;
+  max-width: min(900px, calc(100% - 40px)); /* حد أقصى 900px أو ناقص 40px من عرض الشاشة */
+  height: auto !important;
+  display: block;
+  margin: 0 auto 16px; /* بالنص */
+}
