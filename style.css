@@ -305,3 +305,6 @@ img.hero-logo,
 .hero .btn {
   margin-top: 20px; /* فراغ 20 بكسل */
 }
+body {
+  background: red !important;
+}
