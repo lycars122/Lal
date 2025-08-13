@@ -259,3 +259,12 @@ img.hero-logo,
   margin: 0 auto 16px !important;       /* بالنص + مسافة تحت */
   object-fit: contain !important;
 }
+/* تكبير اللوجو ليملأ تقريباً عرض الشاشة */
+.hero-logo {
+  width: calc(100% - 40px) !important; /* 20px فراغ من كل طرف */
+  max-width: 900px !important;         /* حد أقصى على الشاشات الكبيرة */
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto 16px !important;      /* بالنص + مسافة تحت */
+  object-fit: contain !important;
+}
