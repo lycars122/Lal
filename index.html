@@ -120,23 +120,39 @@
   </section>
 
   <!-- Services -->
-  <section class="section reveal" id="services">
-    <h2 class="section-title" data-i18n="services">الخدمات</h2>
-    <div class="grid">
-      <div class="card">
-        <h3 data-i18n="svcBuyT">شراء — السيارات المتوفّرة</h3>
-        <p data-i18n="svcBuyD">تصفّح السيارات الجاهزة الآن مع المواصفات والصور وتواصل واتساب فورًا.</p>
-      </div>
-      <div class="card">
-        <h3 data-i18n="svcFindT">توفير — اطلب سيارتك</h3>
-        <p data-i18n="svcFindD">احكيلنا الميزانية والسنة والمواصفات. منبحث بألمانيا والاتحاد الأوروبي ومنجيب لك الأفضل.</p>
-      </div>
-      <div class="card">
-        <h3 data-i18n="svcSellT">بيع — سيارتك</h3>
-        <p data-i18n="svcSellD">عرض سريع. ارفع الصور والتفاصيل ومنرجع لك على واتساب/إيميل.</p>
+ <section class="section reveal" id="services">
+  <h2 class="section-title" data-i18n="services">الخدمات</h2>
+  <div class="grid">
+    <!-- شراء -->
+    <div class="card">
+      <h3 data-i18n="svcBuyT">شراء — السيارات المتوفّرة</h3>
+      <p data-i18n="svcBuyD">تصفّح السيارات الجاهزة الآن مع المواصفات والصور وتواصل واتساب فورًا.</p>
+      <div class="row">
+        <a class="btn" href="#inventory" data-i18n="viewCars">شاهد السيارات</a>
       </div>
     </div>
-  </section>
+
+    <!-- توفير -->
+    <div class="card">
+      <h3 data-i18n="svcFindT">توفير — اطلب سيارتك</h3>
+      <p data-i18n="svcFindD">احكيلنا الميزانية والسنة والمواصفات. منبحث بألمانيا والاتحاد الأوروبي ومنجيب لك الأفضل.</p>
+      <div class="row">
+        <a id="waFind" class="btn" target="_blank" rel="noreferrer" data-i18n="requestNow">اطلب على واتساب</a>
+      </div>
+    </div>
+
+    <!-- بيع -->
+    <div class="card">
+      <h3 data-i18n="svcSellT">بيع — سيارتك</h3>
+      <p data-i18n="svcSellD">عرض سريع. ارفع الصور والتفاصيل ومنرجع لك على واتساب/إيميل.</p>
+      <div class="row">
+        <a id="waSell" class="btn" target="_blank" rel="noreferrer" data-i18n="sellNow">بيع عبر واتساب</a>
+        <a id="mailSell" class="btn" data-i18n="emailBtn">إرسال إيميل</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Inventory -->
   <section class="section reveal" id="inventory">
