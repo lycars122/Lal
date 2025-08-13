@@ -231,3 +231,10 @@ img{ max-width:100%; height:auto; display:block; border-radius:12px; }
   display: block;
   margin: 0 auto 16px; /* بالنص */
 }
+.hero-logo img {
+  width: 100%;
+  max-width: calc(100% - 40px); /* فراغ 20px من كل جهة */
+  height: auto;
+  display: block;
+  margin: 0 auto 16px auto; /* بالنص وفي مسافة تحت */
+}
